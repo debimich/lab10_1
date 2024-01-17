@@ -1,0 +1,5 @@
+<%= form_tag({controller: 'sqrt', action: 'view', format: 'xml'}, :method => "get") do %>
+	<%= label_tag("Введите число:") %>
+	<%= text_field_tag(:v) %> <br/>
+	<%= submit_tag("Вычислить корень") %>
+<% end %>
