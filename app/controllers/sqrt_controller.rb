@@ -15,8 +15,12 @@ class SqrtController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.xml { render 'sqrt/view' }
-      format.rss { render 'sqrt/view' }
+      format.xml {render xml: @guesses.to_xml(root: 'guesses')}
     end
+
+    xml_content = "<?xml-stylesheet type=\"text/xsl\" href=\"/some_transformer.xslt\"?>\n" + @guesses.to_xml(root: 'guesses', skip_instruct: true)
+    xml_content.prepend("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n")
+
+    File.write('debug.xml', xml_content)
   end
 end
